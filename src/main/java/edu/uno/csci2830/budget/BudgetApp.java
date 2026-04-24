@@ -110,10 +110,22 @@ public class BudgetApp extends Application {
     }
 
     private void showTransactionsScreen() {
-
+        //TODO: Develop screen once more transaction logic is implemented.
     }
 
     private void showSummaryScreen() {
+        //TODO: Develop screen once more transaction logic is implemented.
+    }
 
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
