@@ -56,7 +56,8 @@ public class BudgetApp extends Application {
         categoryBox.setPromptText("Category");
 
         ComboBox<TransactionType> typeBox = new ComboBox<>();
-        typeBox.getItems().addAll(TransactionType.INCOME, TransactionType.EXPENSE);
+        // TODO: Need to work on TransactionType class for line below to function.
+        //typeBox.getItems().addAll(TransactionType.INCOME, TransactionType.EXPENSE);
         typeBox.setPromptText("Type");
 
         Button submitButton = new Button("Submit");
