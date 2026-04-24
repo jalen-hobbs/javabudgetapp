@@ -23,9 +23,13 @@ public class BudgetApp extends Application {
         Label title = new Label("Personal Budget Tracker");
 
         Button addButton = new Button("Add Transaction");
+        addButton.setId("addButton");
         Button viewButton = new Button("View Transactions");
+        addButton.setId("viewButton");
         Button summaryButton = new Button("View Summary");
+        summaryButton.setId("summaryButton");
         Button exitButton = new Button("Exit");
+        addButton.setId("addButton");
 
         addButton.setOnAction(e -> showAddTransactionScreen());
         viewButton.setOnAction(e -> showTransactionsScreen());
@@ -61,7 +65,9 @@ public class BudgetApp extends Application {
         typeBox.setPromptText("Type");
 
         Button submitButton = new Button("Submit");
+        submitButton.setId("submitButton");
         Button backButton = new Button("Back");
+        backButton.setId("backButton");
 
         submitButton.setOnAction(e -> {
             // TODO: Implement logic for when user submits transaction.
