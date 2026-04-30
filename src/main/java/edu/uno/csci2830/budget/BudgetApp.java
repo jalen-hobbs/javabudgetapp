@@ -111,7 +111,28 @@ public class BudgetApp extends Application {
     }
 
     private void showTransactionsScreen() {
-        //TODO: Develop screen once more transaction logic is implemented.
+        Label title = new Label("All Transactions");
+
+        ListView<String> transactionList = new ListView<>();
+
+        for (Transaction t : manager.getTransactions()) {
+            transactionList.getItems().add(
+                    t.getDate() + " | " +
+                            t.getDescription() + " | " +
+                            t.getCategory() + " | " +
+                            t.getType() + " | $" +
+                            String.format("%.2f", t.getAmount())
+            );
+        }
+
+        Button backButton = new Button("Back to Dashboard");
+        backButton.setOnAction(e -> showDashboard());
+
+        VBox layout = new VBox(10, title, transactionList, backButton);
+        layout.setStyle("-fx-padding: 20;");
+
+        stage.setScene(new Scene(layout, 600, 400));
+    }
     }
 
     private void showSummaryScreen() {
