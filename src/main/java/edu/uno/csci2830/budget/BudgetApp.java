@@ -60,8 +60,7 @@ public class BudgetApp extends Application {
         categoryBox.setPromptText("Category");
 
         ComboBox<TransactionType> typeBox = new ComboBox<>();
-        // TODO: Need to work on TransactionType class for line below to function.
-        //typeBox.getItems().addAll(TransactionType.INCOME, TransactionType.EXPENSE);
+        typeBox.getItems().addAll(TransactionType.INCOME, TransactionType.EXPENSE);
         typeBox.setPromptText("Type");
 
         Button submitButton = new Button("Submit");
@@ -70,9 +69,6 @@ public class BudgetApp extends Application {
         backButton.setId("backButton");
 
         submitButton.setOnAction(e -> {
-            // TODO: Implement logic for when user submits transaction.
-            // ^^^ Can't be done until other transaction classes/logic are implemented.
-            /*
             try {
                 String description = descriptionField.getText();
                 double amount = Double.parseDouble(amountField.getText());
@@ -94,7 +90,6 @@ public class BudgetApp extends Application {
             } catch (IllegalArgumentException ex) {
                 showAlert("Invalid Input", ex.getMessage());
             }
-            */
         });
 
         backButton.setOnAction(e -> showDashboard());
