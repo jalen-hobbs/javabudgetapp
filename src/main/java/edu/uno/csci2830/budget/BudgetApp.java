@@ -133,11 +133,23 @@ public class BudgetApp extends Application {
 
         stage.setScene(new Scene(layout, 600, 400));
     }
-    }
 
     private void showSummaryScreen() {
-        //TODO: Develop screen once more transaction logic is implemented.
+        Label title = new Label("Budget Summary");
+
+        Label incomeLabel = new Label("Total Income: $" + String.format("%.2f", manager.getTotalIncome()));
+        Label expenseLabel = new Label("Total Expenses: $" + String.format("%.2f", manager.getTotalExpenses()));
+        Label balanceLabel = new Label("Current Balance: $" + String.format("%.2f", manager.getBalance()));
+
+        Button backButton = new Button("Back to Dashboard");
+        backButton.setOnAction(e -> showDashboard());
+
+        VBox layout = new VBox(15, title, incomeLabel, expenseLabel, balanceLabel, backButton);
+        layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
+
+        stage.setScene(new Scene(layout, 400, 300));
     }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
