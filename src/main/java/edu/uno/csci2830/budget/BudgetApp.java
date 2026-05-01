@@ -101,18 +101,22 @@ public class BudgetApp extends Application {
 
                 Transaction transaction = new Transaction(description, amount, date, category, type);
                 manager.addTransaction(transaction);
-                try {
-                    manager.saveToFile(DATA_FILE);
-                } catch (IOException ex) {
-                    showAlert("Save Error", "Could not save transaction.");
-                }
+                manager.saveToFile(DATA_FILE);
 
-                showAlert("Success", "Transaction added successfully!");
-                showDashboard();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Transaction added successfully.");
+
+                alert.setOnHidden(event -> showDashboard());
+                alert.showAndWait();
+
             } catch (NumberFormatException ex) {
                 showAlert("Invalid Amount", "Amount must be a valid number.");
             } catch (IllegalArgumentException ex) {
                 showAlert("Invalid Input", ex.getMessage());
+            } catch (IOException ex) {
+                showAlert("Save Error", "Could not save transaction.");
             }
         });
 
