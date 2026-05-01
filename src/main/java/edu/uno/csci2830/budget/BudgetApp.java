@@ -51,6 +51,7 @@ public class BudgetApp extends Application {
     /** Displays the main dashboard screen with navigation buttons. */
     private void showDashboard() {
         Label title = new Label("Personal Budget Tracker");
+        title.setId("dashboardTitle");
 
         Button addButton = new Button("Add Transaction");
         addButton.setId("addButton");
@@ -89,6 +90,7 @@ public class BudgetApp extends Application {
     /** Displays the form used to create a new income or expense transaction. */
     private void showAddTransactionScreen() {
         Label title = new Label("Add Transaction");
+        title.setId("addTitle");
 
         TextField descriptionField = new TextField();
         descriptionField.setPromptText("Description");
@@ -112,7 +114,7 @@ public class BudgetApp extends Application {
         submitButton.setId("submitButton");
 
         Button backButton = new Button("Back");
-        backButton.setId("backButton");
+        backButton.setId("addBackButton");
 
         submitButton.setOnAction(e -> {
             try {
@@ -165,6 +167,7 @@ public class BudgetApp extends Application {
     /** Displays all transactions currently stored by the budget manager. */
     private void showTransactionsScreen() {
         Label title = new Label("All Transactions");
+        title.setId("transactionsTitle");
 
         ListView<String> transactionList = new ListView<>();
 
@@ -173,6 +176,7 @@ public class BudgetApp extends Application {
         }
 
         Button backButton = new Button("Back to Dashboard");
+        backButton.setId("transactionsBackButton");
         backButton.setOnAction(e -> showDashboard());
 
         VBox layout = new VBox(10, title, transactionList, backButton);
@@ -184,6 +188,7 @@ public class BudgetApp extends Application {
     /** Displays total income, total expenses, and the current balance. */
     private void showSummaryScreen() {
         Label title = new Label("Budget Summary");
+        title.setId("summaryTitle");
 
         Label incomeLabel = new Label("Total Income: $" + String.format("%.2f", manager.getTotalIncome()));
         Label expenseLabel = new Label(
@@ -191,6 +196,7 @@ public class BudgetApp extends Application {
         Label balanceLabel = new Label("Current Balance: $" + String.format("%.2f", manager.getBalance()));
 
         Button backButton = new Button("Back to Dashboard");
+        backButton.setId("summaryBackButton");
         backButton.setOnAction(e -> showDashboard());
 
         VBox layout = new VBox(15, title, incomeLabel, expenseLabel, balanceLabel, backButton);
