@@ -1,5 +1,6 @@
 package edu.uno.csci2830.budget;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +32,16 @@ public class BudgetManager {
 
     public double getBalance() {
         return getTotalIncome() - getTotalExpenses();
+    }
+
+    private final TransactionFileHandler fileHandler = new TransactionFileHandler();
+
+    public void saveToFile(String filename) throws IOException {
+        fileHandler.saveTransactions(filename, transactions);
+    }
+
+    public void loadFromFile(String filename) throws IOException {
+        transactions.clear();
+        transactions.addAll(fileHandler.loadTransactions(filename));
     }
 }

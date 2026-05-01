@@ -10,12 +10,15 @@ public class TransactionFileHandler {
             throws IOException {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            for (Transaction t : transactions) {
-                writer.write(t.getDescription() + "," +
-                        t.getAmount() + "," +
-                        t.getDate() + "," +
-                        t.getCategory() + "," +
-                        t.getType());
+            writer.write("description,amount,date,category,type");
+            writer.newLine();
+
+            for (Transaction transaction : transactions) {
+                writer.write(transaction.getDescription() + ","
+                        + transaction.getAmount() + ","
+                        + transaction.getDate() + ","
+                        + transaction.getCategory() + ","
+                        + transaction.getType());
                 writer.newLine();
             }
         }
@@ -24,19 +27,24 @@ public class TransactionFileHandler {
     public List<Transaction> loadTransactions(String filename)
             throws IOException {
 
-        List<Transaction> list = new ArrayList<>();
+        List<Transaction> transactions = new ArrayList<>();
+        File file = new File(filename);
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
+        if (!file.exists()) {
+            return transactions;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line = reader.readLine(); // skip header
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
 
                 if (parts.length != 5) {
-                    throw new IOException("Invalid file format");
+                    throw new IOException("Invalid CSV format.");
                 }
 
-                list.add(new Transaction(
+                transactions.add(new Transaction(
                         parts[0],
                         Double.parseDouble(parts[1]),
                         parts[2],
@@ -46,6 +54,6 @@ public class TransactionFileHandler {
             }
         }
 
-        return list;
+        return transactions;
     }
 }

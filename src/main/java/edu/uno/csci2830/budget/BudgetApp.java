@@ -7,15 +7,25 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class BudgetApp extends Application {
 
     private final BudgetManager manager = new BudgetManager();
     private Stage stage;
+    private static final String DATA_FILE = "transactions.csv";
 
     @Override
     public void start(Stage stage) {
         this.stage = stage;
         stage.setTitle("Personal Budget Tracker");
+
+        try {
+            manager.loadFromFile(DATA_FILE);
+        } catch (IOException e) {
+            showAlert("Load Error", "Could not load saved transactions.");
+        }
+
         showDashboard();
     }
 
@@ -29,12 +39,21 @@ public class BudgetApp extends Application {
         Button summaryButton = new Button("View Summary");
         summaryButton.setId("summaryButton");
         Button exitButton = new Button("Exit");
-        addButton.setId("addButton");
+        addButton.setId("exitButton");
 
         addButton.setOnAction(e -> showAddTransactionScreen());
         viewButton.setOnAction(e -> showTransactionsScreen());
         summaryButton.setOnAction(e -> showSummaryScreen());
-        exitButton.setOnAction(e -> stage.close());
+
+        exitButton.setOnAction(e -> {
+            try {
+                manager.saveToFile(DATA_FILE);
+            } catch (IOException ex) {
+                showAlert("Save Error", "Could not save transactions.");
+            }
+
+            stage.close();
+        });
 
         VBox layout = new VBox(15, title, addButton, viewButton, summaryButton, exitButton);
         layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
@@ -82,6 +101,11 @@ public class BudgetApp extends Application {
 
                 Transaction transaction = new Transaction(description, amount, date, category, type);
                 manager.addTransaction(transaction);
+                try {
+                    manager.saveToFile(DATA_FILE);
+                } catch (IOException ex) {
+                    showAlert("Save Error", "Could not save transaction.");
+                }
 
                 showAlert("Success", "Transaction added successfully!");
                 showDashboard();
