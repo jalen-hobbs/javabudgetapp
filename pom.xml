@@ -32,18 +32,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- TextFX -->
+        <!-- TestFX -->
         <dependency>
             <groupId>org.testfx</groupId>
             <artifactId>testfx-junit5</artifactId>
             <version>4.0.16-alpha</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.testfx</groupId>
-            <artifactId>openjfx-monocle</artifactId>
-            <version>jdk-11+26</version>
             <scope>test</scope>
         </dependency>
 
